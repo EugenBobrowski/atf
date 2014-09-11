@@ -11,14 +11,9 @@ function getOptionsArray() {
 			'items' => array(
 				'headerImg' => array(
 					'type' => 'addMedia',
-					'title' => __('Header Logotype image', 'dfd'),
+					'title' => __('Header Logotype image', 'atf'),
 					'default' => '',
 					'desc' => 'The optimal size for an image is 310x97'
-				),
-				'headerColor' => array(
-					'type' => 'colorPicker',
-					'title' => __('Header Logotype background color', 'dfd'),
-					'default' => '',
 				),
 			)
 		),
@@ -27,25 +22,20 @@ function getOptionsArray() {
 			'desc' => __('Here you can customize home page'),
 
 			'items' => array(
-				array(
-					'type' => 'title',
-					'title' => 'Layout settings'
+				'hide_empty' => array(
+					'type' => 'onOffBox',
+					'title' => __('Hide empty category', 'atf'),
+					'default' => 'true',
 				),
-				'homePageLayout' => array(
-					'type' => 'radioButtons',
-					'horizontal' => true,
-					'title' => __('Select the leyout of home page', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
-					'options' => array(
-						'no_sidebars' => '<img src="'.get_template_directory_uri().'/atf/options/img/1col.png"> <span>No sidebars </span>',
-						'sidebar_on_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cl.png"> <span>Sidebar on left</span>',
-						'sidebar_on_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cr.png"> <span>Sidebar on right</span>',
-						'2_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cl.png"> <span>2 left sidebars</span>',
-						'either' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cc.png"> <span>Sidebar on either side</span>',
-						'2_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cr.png"> <span>2 right sidebars</span>',
-					),
-					'class' => 'radio-image',
-					'default' => '2_right', // AtfOptions_homePage[items][thumb_width][default]
+				'itemsInLine' => array(
+					'type' => 'textField',
+					'title' => __('Items in line', 'atf'),
+					'default' => '3', // AtfOptions_homePage[items][thumb_width][default]
+				),
+				'itemsNum' => array(
+					'type' => 'textField',
+					'title' => __('How many items must be on home page', 'atf'),
+					'default' => '6', // AtfOptions_homePage[items][thumb_width][default]
 				),
 				array(
 					'type' => 'title',
@@ -53,128 +43,100 @@ function getOptionsArray() {
 				),
 				'thumb_width' => array(
 					'type' => 'textField',
-					'title' => __('Thumbnail width on homepage', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
-					'default' => '900', // AtfOptions_homePage[items][thumb_width][default]
+					'title' => __('Thumbnail width on homepage', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '500', // AtfOptions_homePage[items][thumb_width][default]
 				),
 				'thumb_height' => array(
 					'type' => 'textField',
-					'title' => __('Thumbnail height on homepage', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
-					'default' => '400',
+					'title' => __('Thumbnail height on homepage', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '360',
 				),
 				'textareafield' => array(
 					'type' => 'textarea',
-					'title' => __('Text Area', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
+					'title' => __('Text Area', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
 				),
 
 			)
 		),
-		'archivePageOpts' => array(
-			'name' => 'Archive Options',
-			'desc' => 'The archive settings',
+		'portfolioSidebar' => array(
+			'name' => 'Portfolio Sidebar',
+			'desc' => 'Portfolio Sidebar Settings',
 			'items' => array(
+				'items_pro_year' => array(
+					'type' => 'textField',
+					'title' => __('Portfolios pro year', 'atf'),
+					'desc' => __('How many items will be showed in one year section', 'atf'),
+					'default' => '2',
+				),
+//				'items_pro_single_year' => array(
+//					'type' => 'textField',
+//					'title' => __('Portfolios pro single year', 'atf'),
+//					'desc' => __('How many items will be showed in single year section', 'atf'),
+//					'default' => '6',
+//				),
+
 				array(
 					'type' => 'title',
-					'title' => 'Layout settings'
+					'title' => 'Carousel settings'
 				),
-				'archiveLayout' => array(
-					'type' => 'radioButtons',
-					'title' => __('Select the leyout of home page', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
-					'options' => array(
-						'no_sidebars' => '<img src="'.get_template_directory_uri().'/atf/options/img/1col.png"> <span>No sidebars </span>',
-						'sidebar_on_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cl.png"> <span>Sidebar on left</span>',
-						'sidebar_on_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cr.png"> <span>Sidebar on right</span>',
-						'2_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cl.png"> <span>2 left sidebars</span>',
-						'either' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cc.png"> <span>Sidebar on either side</span>',
-						'2_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cr.png"> <span>2 right sidebars</span>',
-					),
-					'class' => 'radio-image',
-					'default' => '2_right', // AtfOptions_homePage[items][thumb_width][default]
+				'interval' => array(
+					'type' => 'textField',
+					'title' => __('Carousel interval', 'atf'),
+					'desc' => __('In seconds', 'atf'),
+					'default' => '10', // AtfOptions_homePage[items][thumb_width][default]
+				),
+				'img_width' => array(
+					'type' => 'textField',
+					'title' => __('Picture width in the gallery', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '500', // AtfOptions_homePage[items][thumb_width][default]
+				),
+				'img_height' => array(
+					'type' => 'textField',
+					'title' => __('Picture height in the gallery', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '360',
+				),
+				'thumb_width' => array(
+					'type' => 'textField',
+					'title' => __('Thumbnail width in the gallery', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '64', // AtfOptions_homePage[items][thumb_width][default]
+				),
+				'thumb_height' => array(
+					'type' => 'textField',
+					'title' => __('Thumbnail height in the gallery', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '44',
 				),
 			),
 		),
-		'404PageOpts' => array(
-			'name' => '404 Options',
-			'desc' => 'Set as would show your 404 page',
-			'incFile' => '', // The file that will be included on this section
+		'product' => array(
+			'name' => 'Product Settings',
+			'desc' => __('Product settings'),
+
 			'items' => array(
-				array(
-					'type' => 'title',
-					'title' => 'Layout settings'
-				),
-				'404Layout' => array(
-					'type' => 'radioButtons',
-					'title' => __('Select the leyout of home page', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
-					'options' => array(
-						'no_sidebars' => '<img src="'.get_template_directory_uri().'/atf/options/img/1col.png"> <span>No sidebars </span>',
-						'sidebar_on_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cl.png"> <span>Sidebar on left</span>',
-						'sidebar_on_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cr.png"> <span>Sidebar on right</span>',
-						'2_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cl.png"> <span>2 left sidebars</span>',
-						'either' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cc.png"> <span>Sidebar on either side</span>',
-						'2_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cr.png"> <span>2 right sidebars</span>',
-					),
-					'class' => 'radio-image',
-					'default' => 'no_sidebars', // AtfOptions_homePage[items][thumb_width][default]
-				),
-			),
-		),
-		'social' => array(
-			'name' => 'Social',
-			'desc' => 'Description',
-			'content' => 'oiuOptional: Some text that will be show on the options section',
-			'incFile' => '', // The file that will be included on this section
-		),
-		'appearence' => array(
-			'name' => 'Appearence',
-			'desc' => 'Description',
-			'content' => ';lkjOptional: Some text that will be show on the options section',
-			'incFile' => '', // The file that will be included on this section
-		),
-		'design' => array(
-			'name' => 'Design',
-			'desc' => 'Description',
-			'content' => 'Optional: Some text that will be show on the options section',
-			'incFile' => '', // The file that will be included on this section
-		),
-		'content' => array(
-			'name' => 'Content',
-			'desc' => 'Description',
-			'content' => 'Optional: Some text that will be show on the options section',
-			'incFile' => '', // The file that will be included on this section
-		),
-		'examples' => array(
-			'name' => 'Examples',
-			'desc' => 'The examples',
-			'items' => array(
-				array(
-					'type' => 'title',
-					'title' => 'The title H3'
-				),
-				'radioButtons' => array(
-					'type' => 'radioButtons',
-					'title' => __('\'type\' => \'radioButtons\'', 'dfd'),
-					'desc' => __('You may add any other social share buttons to this field.', 'dfd'),
-					'options' => array(
-						'no_sidebars' => '<img src="'.get_template_directory_uri().'/atf/options/img/1col.png"> <span>No sidebars </span>',
-						'sidebar_on_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cl.png"> <span>Sidebar on left</span>',
-						'sidebar_on_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/2cr.png"> <span>Sidebar on right</span>',
-						'2_left' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cl.png"> <span>2 left sidebars</span>',
-						'either' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cc.png"> <span>Sidebar on either side</span>',
-						'2_right' => '<img src="'.get_template_directory_uri().'/atf/options/img/3cr.png"> <span>2 right sidebars</span>',
-					),
-					'class' => 'radio-image',
-					'default' => '2_right', // AtfOptions_homePage[items][thumb_width][default]
-				),
-				'onOffBox' => array(
+				'crop_category_img' => array(
 					'type' => 'onOffBox',
-					'title' => __('Enable Tweets', 'dfd'),
-					'default' => 'true',
+					'title' => __('Crop category images', 'atf'),
+					'default' => false,
 				),
-			),
+				'img_width' => array(
+					'type' => 'textField',
+					'title' => __('Picture width in the gallery', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '1200', // AtfOptions_homePage[items][thumb_width][default]
+				),
+				'img_height' => array(
+					'type' => 'textField',
+					'title' => __('Picture height in the gallery', 'atf'),
+					'desc' => __('You may add any other social share buttons to this field.', 'atf'),
+					'default' => '600',
+				),
+			)
 		),
 	);
 }

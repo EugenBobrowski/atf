@@ -64,7 +64,8 @@ class AtfOptionsAdmin {
 		}
 
 		$screen = get_current_screen();
-		if ($screen->id == $this->plugin_screen_hook_suffix) {
+		$atfOptionsIs = strpos($screen->id, str_replace('toplevel', '', $this->plugin_screen_hook_suffix));
+		if ($atfOptionsIs !== false) {
 			wp_enqueue_script($this->optionsSlug . '-admin-script', get_template_directory_uri().'/atf/options/admin/assets/admin.js', array('jquery', 'wp-color-picker'));
 
 			wp_enqueue_script(
@@ -81,7 +82,7 @@ class AtfOptionsAdmin {
 	}
 
 	public function add_plugin_admin_menu() {
-
+		$this->optionsArray = getOptionsArray();
 		$this->plugin_screen_hook_suffix = add_menu_page(
 			__('Theme Options', 'atf'),
 			__('Theme Options', 'atf'),
@@ -91,6 +92,11 @@ class AtfOptionsAdmin {
 			get_template_directory_uri().'/atf/options/admin/assets/redvorona.png'//$icon_url,
 			//$position
 		);
+		foreach (getOptionsArray() as $sectID=>$section) {
+			//add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
+			add_submenu_page('atf-options', __('Theme Options', 'atf'), $section['name'], 'edit_theme_options', 'atf-options-' .$sectID, array($this, 'display_plugin_admin_page'));
+		}
+
 
 	}
 
@@ -100,7 +106,7 @@ class AtfOptionsAdmin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
-		$this->optionsArray = getOptionsArray();
+//		$this->optionsArray = getOptionsArray();
 		atf_enqueue_less_style('options-style', '/atf/options/admin/assets/options.css', '/atf/options/admin/assets/options.less');
 		include 'views/admin.php';
 		add_action('admin_footer_text', array($this, 'admin_footer_text'));

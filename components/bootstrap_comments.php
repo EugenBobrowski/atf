@@ -33,49 +33,25 @@ if ( ! function_exists( 'twentytwelve_comment' ) ) :
 				global $post;
 				?>
 					<li <?php comment_class('media'); ?> id="li-comment-<?php comment_ID(); ?>">
-					<div class="pull-left">
-						<?php echo get_avatar( $comment, 64 );?>
-					</div>
-					<div class="media-body">
-					<article id="comment-<?php comment_ID(); ?>" class="comment media">
-						<header class="comment-meta comment-author vcard clearfix">
-							<div class="pull-left">
-								<?php
-								printf( '<cite class="fn clearfix"><h4 class="media-heading" style="display: inline-block">%1$s</h4> %2$s</cite>',
-									get_comment_author_link(),
-									// If current post author is also comment author, make it known visually.
-									( $comment->user_id === $post->post_author ) ? '<span class="label label-default"> ' . __( 'post author', 'bootstrap' ) . '</span>' : ''
-								);
-								?>
-							</div>
-							<?php edit_comment_link( __( '<span class="glyphicon glyphicon-edit"></span> Edit', 'bootstrap' ), '<span style="margin-left: 10px">', '</span>' ); ?>
-							<div class="pull-right">
-								<?php
-								printf( '<span class="glyphicon glyphicon-calendar"> </span><a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
-									esc_url( get_comment_link( $comment->comment_ID ) ),
-									get_comment_time( 'c' ),
-									/* translators: 1: date, 2: time */
-									sprintf( __( '%1$s at %2$s', 'bootstrap' ), get_comment_date(), get_comment_time() )
-								);
-								?>
-							</div>
-						</header><!-- .comment-meta -->
-						<?php if ( '0' == $comment->comment_approved ) : ?>
-							<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'bootstrap' ); ?></p>
-						<?php endif; ?>
 
-						<section class="comment-content comment">
+					<div class="media-body">
+					<article id="comment-<?php comment_ID(); ?>" class="comment row">
+						<header class="comment-meta comment-author vcard clearfix col-md-5">
+							<h4><?php echo get_comment_author_link();?></h4>
+
+
+						</header><!-- .comment-meta -->
+
+
+						<section class="comment-content comment col-md-7">
+							<?php if ( '0' == $comment->comment_approved ) : ?>
+								<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'bootstrap' ); ?></p>
+							<?php endif; ?>
+
 							<?php comment_text(); ?>
+							<?php edit_comment_link( __( '<span class="glyphicon glyphicon-edit"></span> Edit', 'bootstrap' ), '<span style="margin-left: 10px">', '</span>' ); ?>
 
 						</section><!-- .comment-content -->
-
-						<div class="reply">
-							<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span class="glyphicon glyphicon-comment"></span>', 'bootstrap' ), 'after' => ' ', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-						</div><!-- .reply -->
-
-
-
-
 					</article><!-- #comment-## -->
 
 				<?php

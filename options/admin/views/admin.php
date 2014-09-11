@@ -21,12 +21,17 @@
 
 	<div class="options-panel">
 		<?php
-
-
+		$screen = get_current_screen();
 		$i = 0;
 		$sectionList = '';
 		$sectionBody = '';
 		$active = '';
+		if (isset($_GET['sect'])){
+			$activeSect = $_GET['sect'];
+		} else {
+			$activeSect = '';
+		}
+
 		foreach ($this->optionsArray as $sectId => $sectValue) {
 
 			$options = get_option(AFT_OPTIONS_PREFIX.$sectId);
@@ -38,7 +43,7 @@
 				$sectionDesc = '';
 			}
 
-			if ($i == 0) {
+			if ((empty($activeSect) && $i == 0) || $activeSect == $sectId) {
 				$title = $sectValue['name'];
 
 				$i++;
@@ -47,6 +52,7 @@
 			} else {
 				$active = '';
 			}
+
 			$sectionList .= '<li><a href="#" id="'. $sectId.'" class="'.$active.'" data-section="section_'.$sectId.'" data-description="'.$sectionDesc.'">'.$sectValue['name'].'</a></li>';
 			$sectionBody .= '<div id="section_'.$sectId.'" class="one-section-body '.$active.' ">';
 			$sectionBody .= '<table class="form-table"><tbody>';

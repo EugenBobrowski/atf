@@ -46,14 +46,17 @@ function get_atf_post_thumbnail($width = 900, $height = 400) {
 	}
 }
 
-function the_thumbnail_link($size=false) {
+function the_thumbnail_link($size=false, $post_id = null) {
+	echo get_thumbnail_link($size, $post_id);
+}
+function get_thumbnail_link($size=false, $post_id = null) {
 	if (has_post_thumbnail()) {
 		if (!$size) {
-			$thumb = wp_get_attachment_image_src(get_post_thumbnail_id(), 'post-thumbnail');
-			echo $thumb[0];
+			$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'post-thumbnail');
+			return $thumb[0];
 		} else {
-			$thumb = wp_get_attachment_image_src(get_post_thumbnail_id(), $size);
-			echo $thumb[0];
+			$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), $size);
+			return $thumb[0];
 		}
 
 	}
