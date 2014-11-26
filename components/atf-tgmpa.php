@@ -1,25 +1,9 @@
 <?php
-/**
- * This file represents an example of the code that themes would use to register
- * the required plugins.
- *
- * It is expected that theme authors would copy and paste this code into their
- * functions.php file, and amend to suit.
- *
- * @package    TGM-Plugin-Activation
- * @subpackage Example
- * @version    2.4.0
- * @author     Thomas Griffin <thomasgriffinmedia.com>
- * @author     Gary Jones <gamajo.com>
- * @copyright  Copyright (c) 2014, Thomas Griffin
- * @license    http://opensource.org/licenses/gpl-2.0.php GPL v2 or later
- * @link       https://github.com/thomasgriffin/TGM-Plugin-Activation
- */
 
 /**
  * Include the TGM_Plugin_Activation class.
  */
-require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
+require_once dirname( __FILE__ ) . '/../external/tgm-plugin-activation/class-tgm-plugin-activation.php';
 
 add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
 /**
@@ -43,34 +27,37 @@ function my_theme_register_required_plugins() {
     $plugins = array(
 
         // This is an example of how to include a plugin pre-packaged with a theme.
-        array(
-            'name'               => 'TGM Example Plugin', // The plugin name.
-            'slug'               => 'tgm-example-plugin', // The plugin slug (typically the folder name).
-            'source'             => get_stylesheet_directory() . '/lib/plugins/tgm-example-plugin.zip', // The plugin source.
-            'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-            'version'            => '', // E.g. 1.0.0. If set, the active plugin must be this version or higher.
-            'force_activation'   => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
-            'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
-            'external_url'       => '', // If set, overrides default API URL and points to an external URL.
-        ),
+//        array(
+//            'name'               => 'TGM Example Plugin', // The plugin name.
+//            'slug'               => 'tgm-example-plugin', // The plugin slug (typically the folder name).
+//            'source'             => get_stylesheet_directory() . '/lib/plugins/tgm-example-plugin.zip', // The plugin source.
+//            'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+//            'version'            => '', // E.g. 1.0.0. If set, the active plugin must be this version or higher.
+//            'force_activation'   => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch.
+//            'force_deactivation' => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins.
+//            'external_url'       => '', // If set, overrides default API URL and points to an external URL.
+//        ),
 
         // This is an example of how to include a plugin from a private repo in your theme.
-        array(
-            'name'               => 'TGM New Media Plugin', // The plugin name.
-            'slug'               => 'tgm-new-media-plugin', // The plugin slug (typically the folder name).
-            'source'             => 'https://s3.amazonaws.com/tgm/tgm-new-media-plugin.zip', // The plugin source.
-            'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-            'external_url'       => 'https://github.com/thomasgriffin/New-Media-Image-Uploader', // If set, overrides default API URL and points to an external URL.
-        ),
+//        array(
+//            'name'               => 'TGM New Media Plugin', // The plugin name.
+//            'slug'               => 'tgm-new-media-plugin', // The plugin slug (typically the folder name).
+//            'source'             => 'https://s3.amazonaws.com/tgm/tgm-new-media-plugin.zip', // The plugin source.
+//            'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+//            'external_url'       => 'https://github.com/thomasgriffin/New-Media-Image-Uploader', // If set, overrides default API URL and points to an external URL.
+//        ),
 
         // This is an example of how to include a plugin from the WordPress Plugin Repository.
-        array(
-            'name'      => 'BuddyPress',
-            'slug'      => 'buddypress',
-            'required'  => false,
-        ),
+//        array(
+//            'name'      => 'BuddyPress',
+//            'slug'      => 'buddypress',
+//            'required'  => false,
+//        ),
 
     );
+    if (function_exists('addAtfReqPlugins')) {
+        $plugins = array_merge_recursive($plugins, addAtfReqPlugins());
+    }
 
     /**
      * Array of configuration settings. Amend each line as needed.

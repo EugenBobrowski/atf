@@ -6,9 +6,10 @@ function atf_enqueue_less_style ( $handle, $srcStyle = false, $srcLess  = false,
 	$fileCssUrl = get_template_directory_uri().$srcStyle;
 	if ((defined('ATF_LESS') && ATF_LESS == true) || !file_exists($fileCssPath) || $compile) {
 		if (file_exists($fileLessPath)) {
-			require_once get_template_directory()."/atf/external/lessphp/lessc.inc.php";
-			$less = new lessc;
-			file_put_contents($fileCssPath, $less->compileFile ($fileLessPath));
+			require_once get_template_directory()."/atf/external/less.php/Less.php";
+			$less = new Less_Parser();
+            $less->parseFile($fileLessPath);
+			file_put_contents($fileCssPath, $less->getCss());
 
 			//Notices
 			if (is_admin()) {

@@ -20,7 +20,105 @@ class AtfHtmlHelper {
 
 		return $result;
 	}
+    public static function typography ($args = array()) {
+
+
+
+
+
+	}
+    public static function googlefont_redux ($args = array()) {
+
+        wp_enqueue_script(
+            'redux-opts-googlefonts-js',
+            get_template_directory_uri().'/atf/options/admin/fields/google_webfonts/jquery.fontselect.js',
+            array('jquery'),
+            time(),
+            true
+        );
+
+		$default = array(
+			'value' => '',
+			'class' => '',
+			'addClass' => '',
+		);
+
+		foreach ($default as $key => $value) {
+			if (!isset($args[$key])) {
+				$args[$key] = $value;
+			}
+		}
+
+        $result = '<p class="description" style="color:red;">' . __('The fonts provided below are free to use custom fonts from the <a href="http://www.google.com/webfonts" target="_blank">Google Web Fonts directory</a>', 'dfd') . '</p>';
+
+        $result .= '<input type="text" id="' . $args['id'] . '" name="' . $args['name'] . '" class="font"  ' . 'value="' . esc_attr($args['value']) . '" />';
+
+        $result .= '<h3 id="' . $args['id'] . '" class="example">Lorem Ipsum is simply dummy text</h3>';
+
+        $result .= (isset($args['desc']) && !empty($args['desc'])) ? ' <span class="description">' . $args['desc'] . '</span>' : '';
+
+        return $result;
+
+
+	}
+    public static function googlefont ($args = array()) {
+
+		$default = array(
+			'value' => '',
+			'class' => '',
+			'addClass' => '',
+		);
+        $listStr = file_get_contents(get_template_directory().'/atf/options/fontslist.txt');
+
+        $listArray = explode('",'.PHP_EOL.'"', $listStr);
+
+//        foreach ($listArray as $value) {
+//            $font = explode(':', $value);
+//
+//            if (isset($font[1])) {
+//                $listArray2[$font[0]][] = $font[1];
+//            } else {
+//                $listArray2[$font[0]] = '';
+//            }
+//        }
+
+
+
+		foreach ($default as $key => $value) {
+			if (!isset($args[$key])) {
+				$args[$key] = $value;
+			}
+		}
+
+        $result = '<div class="google-webfonts">';
+
+        $result .= '';
+        $result .= '<select name="'.$args['name'].'">';
+
+        foreach ($listArray as $value) {
+            $result .= '<option value="'.$value.'" '.selected($value, $args['value'], false).' > '.str_replace('+', ' ', $value).' </option>';
+        }
+
+        $result .= '</select>';
+        $result .= '';
+        $result .= '';
+        $result .= '<div class="demotext"></div>';
+        $result .= '';
+        $result .= '<input type="text" class="demotextinput" value="Lorem ipsum dolor sit amet">';
+        $result .= '';
+        $result .= '</div>';
+
+
+        $result .= (isset($args['desc']) && !empty($args['desc'])) ? ' <span class="description">' . $args['desc'] . '</span>' : '';
+
+        return $result;
+
+
+	}
 	public static function addMedia ($args = array()) {
+
+
+
 		$default = array(
 			'value' => '',
 			'class' => 'regular-text',
@@ -150,22 +248,53 @@ class AtfHtmlHelper {
 		return $result;
 	}
 	public static function selectFromTaxonomy ($args) {
+        if (taxonomy_exists($args['taxonomy'])) {
+            $cats = get_terms($args['taxonomy'],
+                array(
+                    'hide_empty' => $args['hide_empty'],
+                ));
 
+            $result = '<select name="'.$args['name'].'">';
 
-		$cats = get_terms($args['taxonomy'],
-			array(
-				'hide_empty' => $args['hide_empty'],
-			));
+            foreach ($cats as $cat) {
+                $result .= '<option value="'.$cat->term_id.'" '.selected($cat->term_id, $args['value'], false).' > '.$cat->name.' </option>';
+            }
 
-		$result = '<select name="'.$args['name'].'">';
+            $result .= '</select>';
 
-		foreach ($cats as $cat) {
-			$result .= '<option value="'.$cat->term_id.'" '.selected($cat->term_id, $args['value'], false).' > '.$cat->name.' </option>';
-		}
+            return $result;
+        } else {
+            var_dump(get_taxonomies());
+            return "Taxonomy not exist";
+        }
+	}
+	public static function checkboxTaxonomy ($args) {
 
-		$result .= '</select>';
+        if (taxonomy_exists($args['taxonomy'])) {
+            $cats = get_terms($args['taxonomy'],
+                array(
+                    'hide_empty' => $args['hide_empty'],
+                ));
 
-		return $result;
+            $result = '';
+
+            foreach ($cats as $cat) {
+                $result .= ' <label><input type="checkbox"'
+                    .' name="'.$args['name'].'[]"'
+                    .' value="'.$cat->term_id.'" ';
+                $result .= (in_array($cat->term_id, $args['value'])) ? 'checked="checked"' : '';
+                $result .= ' > '.$cat->name.'</label> ';
+
+            }
+
+            $result .= '';
+
+            return $result;
+        } else {
+            var_dump(get_taxonomies());
+            return "Taxonomy not exist";
+        }
+
 	}
 	public static function info ($args  = array()) {
 		echo 'info';

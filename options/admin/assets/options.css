@@ -3,8 +3,8 @@
   border-radius: 8px;
   background-color: #fff;
   overflow: hidden;
-  -webkit-box-shadow: 0 0 10px rgba(51,51,51,0.5);
-  box-shadow: 0 0 10px rgba(51,51,51,0.5);
+  -webkit-box-shadow: 0 0 10px rgba(51, 51, 51, 0.5);
+  box-shadow: 0 0 10px rgba(51, 51, 51, 0.5);
 }
 .options-panel * {
   box-sizing: border-box;
@@ -19,14 +19,14 @@
   padding: 10px 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-image: -webkit-gradient(linear,left 0%,left 100%,from(#555),to(#333));
-  background-image: -webkit-linear-gradient(top,#555,0%,#333,100%);
-  background-image: -moz-linear-gradient(top,#555 0%,#333 100%);
-  background-image: linear-gradient(to bottom,#555 0%,#333 100%);
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#555555), to(#333333));
+  background-image: -webkit-linear-gradient(top, #555555, 0%, #333333, 100%);
+  background-image: -moz-linear-gradient(top, #555555 0%, #333333 100%);
+  background-image: linear-gradient(to bottom, #555555 0%, #333333 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff555555', endColorstr='#ff333333', GradientType=0);
-  -webkit-box-shadow: 0 0 10px rgba(51,51,51,0.5);
-  box-shadow: 0 0 10px rgba(51,51,51,0.5);
+  -webkit-box-shadow: 0 0 10px rgba(51, 51, 51, 0.5);
+  box-shadow: 0 0 10px rgba(51, 51, 51, 0.5);
 }
 .options-panel .panel-header h2 {
   margin: 0;
@@ -44,8 +44,8 @@
 .options-panel .sections-section {
   overflow: hidden;
   zoom: 1;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   position: relative;
 }
 .options-panel .sections-section .sections-list {
@@ -73,6 +73,7 @@
   height: 100%;
   color: #666666;
   text-decoration: none;
+  font-weight: bold;
 }
 .options-panel .sections-section .sections-list ul li a.active {
   background: #666666;
@@ -199,4 +200,9 @@
 .options-panel .on-off-box .text.off {
   right: 2px;
   opacity: 1;
+}
+.options-panel .google-webfonts .demotext {
+  padding: 25px;
+  margin: 20px 0;
+  background: #eeeeee;
 }

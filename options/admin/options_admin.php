@@ -41,7 +41,7 @@ class AtfOptionsAdmin {
 
 		$screen = get_current_screen();
 		if ($screen->id == $this->plugin_screen_hook_suffix) {
-			wp_enqueue_style($this->optionsSlug . '-admin-styles', plugins_url('css/admin.css', __FILE__), array());
+
 			wp_enqueue_style( 'wp-color-picker' );
 
 
@@ -128,7 +128,12 @@ class AtfOptionsAdmin {
 			return;
 		}
 
+        $optionsArray = getOptionsArray();
+
 		foreach($_POST[AFT_OPTIONS_PREFIX] as $key=>$value) {
+            if (isset($optionsArray[$key]['function']) && function_exists($optionsArray[$key]['function'])) {
+                $optionsArray[$key]['function']($value);
+            }
 			update_option(AFT_OPTIONS_PREFIX.$key, $value);
 		}
 	}

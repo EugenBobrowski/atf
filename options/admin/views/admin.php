@@ -26,8 +26,8 @@
 		$sectionList = '';
 		$sectionBody = '';
 		$active = '';
-		if (isset($_GET['sect'])){
-			$activeSect = $_GET['sect'];
+		if (isset($_GET['page'])){
+			$activeSect = $_GET['page'];
 		} else {
 			$activeSect = '';
 		}
@@ -43,7 +43,7 @@
 				$sectionDesc = '';
 			}
 
-			if ((empty($activeSect) && $i == 0) || $activeSect == $sectId) {
+			if (((empty($activeSect) || $activeSect == 'atf-options') && $i == 0) || $activeSect == 'atf-options-' .$sectId) {
 				$title = $sectValue['name'];
 
 				$i++;

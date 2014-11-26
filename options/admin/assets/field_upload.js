@@ -42,6 +42,7 @@ jQuery(document).ready(function(){
                     var attachment = custom_file_frame.state().get("selection").first();
 
                     // Update value of the targetfield input with the attachment url.
+
                     jQuery('.atf-options-upload-screenshot',activeFileUploadContext).attr('src', attachment.attributes.url);
                     jQuery('#' + relid ).val(attachment.attributes.url).trigger('change');
 

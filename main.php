@@ -16,6 +16,7 @@ function atf_admin_notice($message) {
 }
 
 include 'components/atf-less.php';
+include 'components/atf-tgmpa.php';
 
 include 'options/options.php';
 
@@ -29,12 +30,6 @@ register_nav_menus( array(
 	'primary' => __( 'Primary Menu', 'THEMENAME' ),
 ) );
 
-/**
- * Adds custom post types
- */
-
-include 'components/atf-portfolio-posttype.php';
-
 
 /**
  * ...
@@ -44,13 +39,7 @@ include 'components/atf-portfolio-posttype.php';
 include 'components/jcarousel-gallery.php';
 include 'components/thumb-getting.php';
 include 'components/wp_bootstrap_navwalker.php';
-
-
-/**
- * Adds support for a custom header image.
- */
-require( get_template_directory() . '/atf/components/custom-header.php' );
-
+include 'components/breadcrumbs.php';
 
 if ( ! function_exists( 'pagination' ) ) :
 	include 'components/bootstrap_pagination.php';
@@ -67,19 +56,17 @@ if ( ! function_exists( 'pagination' ) ) :
 endif;
 
 function custom_login_logo() {
-
 	$headerOpt = getAtfOptions('general');
-
-	if( $headerOpt['headerImg'] !=''){
-
-		$custom_logo = $headerOpt['headerImg'];
-
+	if( $headerOpt['logo'] !=''){
+		$custom_logo = $headerOpt['logo'];
 		echo '<style type="text/css">
 	    body.login{background:#fff;}
-	    h1 a { background-image:url('. $custom_logo .') !important; height: auto !important; min-height: 70px !important; width: 160px !important; background-size: contain !important;} </style>';
+	    h1 a { background-image:url('. $custom_logo .') !important; height: auto !important; min-height: 70px !important; width: 160px !important; background-size: contain !important; background-position: center center !important;} </style>';
 	}
-
-
 }
+add_action('login_head', 'custom_login_logo', 99);
 
-add_action('login_head', 'custom_login_logo');
+function currsiteurl($login_header_url) {
+    return home_url();
+}
+add_filter('login_headerurl', 'currsiteurl');
