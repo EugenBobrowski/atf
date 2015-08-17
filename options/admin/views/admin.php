@@ -67,8 +67,6 @@
 
 				include_once get_template_directory().'/atf/options/htmlhelper.php';
 
-
-
 				foreach ( $sectValue['items'] as $itemId => $item ) {
 
 					if ($item['type'] == 'title') {
@@ -89,11 +87,9 @@
 
 						$sectionBody .= '<tr>';
 						$sectionBody .= '<th scope="row"><label for="'.$item['id'].'">'.$item['title'].'</label></th>';
-						$sectionBody .= '<td>'.AtfHtmlHelper::$item['type']($item).''.'</td>';
+						$sectionBody .= '<td>'. AtfHtmlHelper::$item['type']($item).''.'</td>';
 						$sectionBody .= '</tr>';
 					}
-
-
 				}
 
 			}

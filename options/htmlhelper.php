@@ -179,6 +179,9 @@ class AtfHtmlHelper {
 			}
 		}
 		$result = '<textarea id="'.$args['id'].'" name="'.$args['name'].'" rows="'.$args['rows'].'" cols="'.$args['cols'].'" class="'.$args['class'].$args['addClass'].'" >'.$args['value'].'</textarea>';
+        if (isset($args['desc'])) {
+            $result .= '<p class="description">'.$args['desc'].'</p>';
+        }
 		return $result;
 	}
 	public static function radioButtons ($args  = array()) {
@@ -218,7 +221,7 @@ class AtfHtmlHelper {
 
 
 		$on = '';
-		if ($args['value'] == 'true'){
+		if ($args['value']){
 			$on = 'on';
 		}
 		$result = '<a class="on-off-box '.$on.'" href="#">';
@@ -256,11 +259,19 @@ class AtfHtmlHelper {
 
             $result = '<select name="'.$args['name'].'">';
 
+
+
+
             foreach ($cats as $cat) {
+
                 $result .= '<option value="'.$cat->term_id.'" '.selected($cat->term_id, $args['value'], false).' > '.$cat->name.' </option>';
             }
 
             $result .= '</select>';
+
+            if (isset($args['desc'])) {
+                $result .= '<p class="description">'.$args['desc'].'</p>';
+            }
 
             return $result;
         } else {
@@ -268,6 +279,9 @@ class AtfHtmlHelper {
             return "Taxonomy not exist";
         }
 	}
+
+
+
 	public static function checkboxTaxonomy ($args) {
 
         if (taxonomy_exists($args['taxonomy'])) {
@@ -288,6 +302,10 @@ class AtfHtmlHelper {
             }
 
             $result .= '';
+
+            if (isset($args['desc'])) {
+                $result .= '<p class="description">'.$args['desc'].'</p>';
+            }
 
             return $result;
         } else {

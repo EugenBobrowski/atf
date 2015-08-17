@@ -206,3 +206,6 @@
   margin: 20px 0;
   background: #eeeeee;
 }
+.options-panel .uploader .atf-options-upload-screenshot {
+  max-width: 75%;
+}
