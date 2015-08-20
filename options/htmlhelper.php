@@ -1,6 +1,70 @@
 <?php
 
 class AtfHtmlHelper {
+
+    public static function group ($args = array()) {
+        ?>
+
+
+    <table class="form-table atf-options-group">
+        <thead>
+        <tr>
+            <th class="group-row-id">#</th>
+        <?php
+
+        foreach ($args['items'] as $key => $item) {
+            echo '<th>' . $item['title'] . '</th>';
+        }
+
+        ?>
+            <th class="group-row-controls"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 1;
+        foreach ($args['value'] as $row_key=>$row_val) {
+            echo '<tr class="row">';
+            echo '<td class="group-row-id">' . $i . '</td>';
+            foreach ($args['items'] as $key => $item) {
+                $item['id'] = $key;
+                $item['uniqid'] = uniqid($item['id']);
+                $item['name'] = $args['name'].'['.$row_key.']['.$item['id'].']';
+
+                if (!isset($row_val[$item['id']])) {
+                    $item['value'] = '';
+                } else {
+                    $item['value'] = $row_val[$item['id']];
+                }
+
+
+
+                echo '<td data-field-type="'.$item['type'].'" data-field-name-template="'.$args['name'].'[#]['.$item['id'].']'.'">';
+                echo self::$item['type']($item);
+                echo '</td>';
+
+
+
+            }
+            echo '<td class="group-row-controls">';
+            echo '<a class="btn-control-group plus" href="#" >+</a>';
+            echo '<a class="btn-control-group minus" href="#" >&times;</a>';
+            echo '</td>';
+            echo '</tr>';
+            $i++;
+        }
+
+         ?>
+        </tbody>
+    </table>
+
+
+    <?php
+    }
+
+	public static function text ($args = array()) {
+        return self::textField($args);
+    }
 	public static function textField ($args = array()) {
 		$default = array(
 			'value' => '',
@@ -135,8 +199,8 @@ class AtfHtmlHelper {
 		$result .= '<input type="hidden" id="'.$args['id'].'" name="'.$args['name'].'" value="'.$args['value'].'" class="'.$args['class'].$args['addClass'].'" />';
 		$result .= '<img class="atf-options-upload-screenshot" id="screenshot-'.$args['id'].'" src="'.$args['value'].'" />';
 		if($args['value'] == '') {$remove = ' style="display:none;"'; $upload = ''; } else {$remove = ''; $upload = ' style="display:none;"'; }
-		$result .= ' <a data-update="Select File" data-choose="Choose a File" href="javascript:void(0);"class="atf-options-upload button-secondary"' . $upload . ' rel-id="'.$args['id'].'">' . __('Upload', 'atf') . '</a>';
-		$result .= ' <a href="javascript:void(0);" class="atf-options-upload-remove"' . $remove . ' rel-id="'.$args['id'].'">' . __('Remove Upload', 'atf') . '</a>';
+		$result .= ' <a data-update="Select File" data-choose="Choose a File" href="javascript:void(0);" class="atf-options-upload button-secondary"' . $upload . ' rel-id="'.$args['id'].'">' . __('Upload', 'atf') . '</a>';
+		$result .= ' <a href="javascript:void(0);" class="atf-options-upload-remove  button-secondary"' . $remove . ' rel-id="'.$args['id'].'">' . __('Remove Upload', 'atf') . '</a>';
 		$result .= '</div>';
 
 
@@ -184,6 +248,26 @@ class AtfHtmlHelper {
         }
 		return $result;
 	}
+    public static  function wysiwyg( $args = array() ) {
+        $default = array(
+            'value'     => '',
+            'class'     => 'regular-text',
+            'addClass'  => '',
+            'rows'      => 10,
+            'cols'      => 50,
+            'options'   => array(),
+        );
+        foreach ($default as $key => $value) {
+            if (!isset($args[$key])) {
+                $args[$key] = $value;
+            }
+        }
+
+        wp_editor( $args['value'], $args['id'], $args['options'] );
+        if (isset($args['desc'])) {
+            echo '<p class="description">'.$args['desc'].'</p>';
+        }
+    }
 	public static function radioButtons ($args  = array()) {
 
 		$default = array(
@@ -242,6 +326,10 @@ class AtfHtmlHelper {
 	public static function select ($args) {
 		$result = '<select name="'.$args['name'].'">';
 
+        if (!isset($args['values'])) {
+            $args['values'] = $args['options'];
+        }
+
 		foreach ($args['values'] as $value=>$text) {
 			$result .= '<option value="'.$value.'" '.selected($value, $args['value'], false).' > '.$text.' </option>';
 		}
@@ -250,7 +338,10 @@ class AtfHtmlHelper {
 
 		return $result;
 	}
-	public static function selectFromTaxonomy ($args) {
+	public static function taxonomy_select ($args) {
+        return self::selectFromTaxonomy ($args);
+    }
+    public static function selectFromTaxonomy ($args) {
         if (taxonomy_exists($args['taxonomy'])) {
             $cats = get_terms($args['taxonomy'],
                 array(
@@ -259,7 +350,10 @@ class AtfHtmlHelper {
 
             $result = '<select name="'.$args['name'].'">';
 
-
+            if (!empty($args['show_option_none'])) {
+                $none = (is_bool($args['show_option_none'])) ? __('None') : $args['show_option_none'];
+                $result .= '<option value="" '.selected('', $args['value'], false).' > ' . $none . ' </option>';
+            }
 
 
             foreach ($cats as $cat) {
@@ -317,5 +411,4 @@ class AtfHtmlHelper {
 	public static function info ($args  = array()) {
 		echo 'info';
 	}
-
 }
