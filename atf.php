@@ -14,7 +14,6 @@ function atf_admin_notice($message) {
 
 include 'components/atf-less.php';
 include 'components/atf-tgmpa.php';
-
 include 'options/options.php';
 
 /**

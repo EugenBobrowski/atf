@@ -216,7 +216,7 @@ function bootstrap_gallery_shortcode_for_sidebar($attr) {
 	$navList = '';
 	$largeImgList = '';
 	$i = 0;
-	$carouselId = 'bootstrap-carousel-'.generatePassword();
+	$carouselId = uniqid('bootstrap-carousel-');
 	foreach ( $attachments as $id => $attachment ) {
 
 		if ($i == 0) {
@@ -256,14 +256,4 @@ function bootstrap_gallery_shortcode_for_sidebar($attr) {
 	$output .= '</div>';
 
 	return $output;
-}
-
-function generatePassword($length = 8){
-	$chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
-	$numChars = strlen($chars);
-	$string = '';
-	for ($i = 0; $i < $length; $i++) {
-		$string .= substr($chars, rand(1, $numChars) - 1, 1);
-	}
-	return $string;
 }
