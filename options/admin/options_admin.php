@@ -9,7 +9,7 @@ class AtfOptionsAdmin {
 	private function __construct() {
 
 		if (isset($_POST[AFT_OPTIONS_PREFIX])) {
-			add_action('admin_menu', array($this, 'save_options'));
+			add_action('admin_init', array($this, 'save_options'));
 		}
 		// Add the options page and menu item.
 		add_action('admin_menu', array($this, 'add_plugin_admin_menu'));
@@ -35,6 +35,8 @@ class AtfOptionsAdmin {
 
 	public function enqueue_admin_styles() {
 
+		atf_enqueue_less_style('options-style', '/atf/options/admin/assets/options.css', '/atf/options/admin/assets/options.less');
+
 		if (!isset($this->plugin_screen_hook_suffix)) {
 			return;
 		}
@@ -43,8 +45,6 @@ class AtfOptionsAdmin {
 		if ($screen->id == $this->plugin_screen_hook_suffix) {
 
 			wp_enqueue_style( 'wp-color-picker' );
-
-
 
 		}
 
@@ -67,12 +67,12 @@ class AtfOptionsAdmin {
 		$atfOptionsIs = strpos($screen->id, str_replace('toplevel', '', $this->plugin_screen_hook_suffix));
 		if ($atfOptionsIs !== false) {
 			wp_enqueue_script(
-                $this->optionsSlug . '-admin-script',
-                get_template_directory_uri().'/atf/options/admin/assets/admin.js',
-                array('jquery', 'wp-color-picker', 'jquery-ui-sortable'),
-                time(),
-                true
-            );
+				$this->optionsSlug . '-admin-script',
+				get_template_directory_uri().'/atf/options/admin/assets/admin.js',
+				array('jquery', 'wp-color-picker', 'jquery-ui-sortable'),
+				time(),
+				true
+			);
 
 			wp_enqueue_media();
 			wp_localize_script($this->optionsSlug . '-admin-script', 'redux_upload', array('url' => get_template_directory_uri().'/atf/options/admin/assets/blank.png'));
@@ -89,14 +89,12 @@ class AtfOptionsAdmin {
 			'atf-options',
 			array($this, 'display_plugin_admin_page'),
 			get_template_directory_uri().'/atf/options/admin/assets/atf-options.png'//$icon_url,
-			//$position
+		//$position
 		);
 		foreach (get_options_array() as $sectID=>$section) {
 			//add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
 			add_submenu_page('atf-options', __('Theme Options', 'atf'), $section['name'], 'edit_theme_options', 'atf-options-' .$sectID, array($this, 'display_plugin_admin_page'));
 		}
-
-
 	}
 
 	/**
@@ -106,7 +104,7 @@ class AtfOptionsAdmin {
 	 */
 	public function display_plugin_admin_page() {
 //		$this->optionsArray = getOptionsArray();
-		atf_enqueue_less_style('options-style', '/atf/options/admin/assets/options.css', '/atf/options/admin/assets/options.less');
+
 		include 'views/admin.php';
 		add_action('admin_footer_text', array($this, 'admin_footer_text'));
 	}
