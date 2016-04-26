@@ -25,7 +25,7 @@ include 'options/options.php';
  *
  * @since Twenty Fifteen 1.0
  */
-require get_template_directory() . '/inc/woo-customizing.php';
+
 
 include 'components/shortcode-gallery-views.php';
 include 'components/thumb-getting.php';
