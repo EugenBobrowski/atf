@@ -1,0 +1,3 @@
+[submodule "options/admin/fields"]
+	path = options/admin/fields
+	url = https://eugenbobrowski@bitbucket.org/eugenbobrowski/atfhtmlhelper.git
