@@ -105,8 +105,6 @@
                         }
                         if (isset($sectValue['items'])) {
 
-                            include_once get_template_directory().'/atf/options/htmlhelper.php';
-
                             foreach ( $sectValue['items'] as $itemId => $item ) {
 
                                 if ($item['type'] == 'title') {
@@ -116,6 +114,7 @@
                                     echo  '</tr>';
 
                                 } elseif ($item['type'] == 'group') {
+
 
                                     $item['id'] = $itemId;
 
@@ -127,11 +126,12 @@
                                         $item['value'] = $options[$item['id']];
                                     }
 
+                                    echo  '<tr><th scope="row" colspan="2">';
+                                    echo  '<h3 class="title">'.$item['title'].'</h3>';
+                                    if (isset($item['desc'])) echo '<p class="description">'.$item['desc'].'</p>';
+                                    echo  '</th></tr>';
                                     echo  '<tr>';
-                                    echo  '<th scope="row" colspan="2"><h3 class="title">'.$item['title'].'</h3><p class="description">'.$item['desc'].'</p></th>';
-                                    echo  '</tr>';
-                                    echo  '<tr>';
-                                    echo  '<td scope="row " colspan="2" class="group-container">';
+                                    echo  '<td scope="row" colspan="2" class="group-container">';
 
                                     echo AtfHtmlHelper::$item['type']($item);
 

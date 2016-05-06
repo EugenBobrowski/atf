@@ -15,8 +15,7 @@ class AtfOptionsAdmin {
 		add_action('admin_menu', array($this, 'add_plugin_admin_menu'));
 
 		// Load admin style sheet and JavaScript.
-		add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
-		add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+		add_action('admin_enqueue_scripts', array($this, 'assets'));
 
 
 	}
@@ -33,23 +32,6 @@ class AtfOptionsAdmin {
 		return self::$instance;
 	}
 
-	public function enqueue_admin_styles() {
-
-		atf_enqueue_less_style('options-style', '/atf/options/admin/assets/options.css', '/atf/options/admin/assets/options.less');
-
-		if (!isset($this->plugin_screen_hook_suffix)) {
-			return;
-		}
-
-		$screen = get_current_screen();
-		if ($screen->id == $this->plugin_screen_hook_suffix) {
-
-			wp_enqueue_style( 'wp-color-picker' );
-
-		}
-
-	}
-
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
@@ -57,7 +39,7 @@ class AtfOptionsAdmin {
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
-	public function enqueue_admin_scripts() {
+	public function assets() {
 
 		if (!isset($this->plugin_screen_hook_suffix)) {
 			return;
@@ -66,17 +48,8 @@ class AtfOptionsAdmin {
 		$screen = get_current_screen();
 		$atfOptionsIs = strpos($screen->id, str_replace('toplevel', '', $this->plugin_screen_hook_suffix));
 		if ($atfOptionsIs !== false) {
-			wp_enqueue_script(
-				$this->optionsSlug . '-admin-script',
-				get_template_directory_uri().'/atf/options/admin/assets/admin.js',
-				array('jquery', 'wp-color-picker', 'jquery-ui-sortable'),
-				time(),
-				true
-			);
-
-			wp_enqueue_media();
-			wp_localize_script($this->optionsSlug . '-admin-script', 'redux_upload', array('url' => get_template_directory_uri().'/atf/options/admin/assets/blank.png'));
-
+			include_once 'fields/htmlhelper.php';
+			AtfHtmlHelper::assets(get_template_directory_uri() . '/atf/options/admin/fields/');
 		}
 	}
 
