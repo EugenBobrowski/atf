@@ -39,9 +39,15 @@
 .atf-align-center-vertical(@vertical: 50%) {
 	position: absolute;
 	top: @vertical;
-	-webkit-transform: translateY(-@horizontal);
+	-webkit-transform: translateY(-@vertical);
 	-ms-transform: translateY(-@vertical);
 	transform: translateY(-@vertical);
+}.atf-align-center-horizontal(@horizontal: 50%) {
+	position: absolute;
+	left: @horizontal;
+	-webkit-transform: translateX(-@horizontal);
+	-ms-transform: translateX(-@horizontal);
+	transform: translateX(-@horizontal);
 }
 .atf-transition (@property: all, @time: .2s, @curve: ease-in-out) {
 	@transition: @property @time @curve;
