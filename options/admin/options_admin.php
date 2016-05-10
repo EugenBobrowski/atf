@@ -48,8 +48,8 @@ class AtfOptionsAdmin {
 		$screen = get_current_screen();
 		$atfOptionsIs = strpos($screen->id, str_replace('toplevel', '', $this->plugin_screen_hook_suffix));
 		if ($atfOptionsIs !== false) {
-			include_once 'fields/htmlhelper.php';
-			AtfHtmlHelper::assets(get_template_directory_uri() . '/atf/options/admin/fields/');
+			include_once ATF_PATH . 'options/atf-fields/htmlhelper.php';
+			AtfHtmlHelper::assets(get_template_directory_uri() . '/atf/options/atf-fields/');
 		}
 	}
 

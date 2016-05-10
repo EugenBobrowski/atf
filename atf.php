@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 define ('ATF_VERSION', '1.0');
+define ('ATF_PATH', get_template_directory() . '/atf/' );
 
 
 function atf_admin_notice($message) {
