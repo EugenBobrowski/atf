@@ -19,19 +19,34 @@ class AtfOptions {
 	}
 }
 
-function get_atf_options($sectionName) {
-	$optionsArray = get_options_array();
-	$options = get_option(AFT_OPTIONS_PREFIX.$sectionName);
-	if (!is_array($options)) $options = array();
-	foreach ($optionsArray[$sectionName]['items'] as $itemId => $item ) {
-		if(!isset($options[$itemId]) && isset($item['default'])) {
-			$options[$itemId] = $item['default'];
+function get_atf_options($section_name) {
+	global $atf_options;
+
+	$options_array = get_options_array();
+
+	if (isset($atf_options[$section_name])) return $atf_options[$section_name];
+
+	$section_options = get_option(AFT_OPTIONS_PREFIX . $section_name);
+
+	if (!is_array($section_options)) $section_options = array();
+
+	foreach ($options_array[$section_name]['items'] as $itemId => $item ) {
+		if(!isset($section_options[$itemId]) && isset($item['default'])) {
+			$section_options[$itemId] = $item['default'];
 		}
 	}
-    $options = apply_filters('before_return_options_from_'.$sectionName, $options);
-	return $options;
+
+	$section_options = apply_filters('before_return_options_from_'.$section_name, $section_options);
+
+	return $section_options;
 }
-// Depricated
+
+/**
+ * @param $sectionName
+ *
+ * @return array|mixed|void
+ * @deprecated
+ */
 function getAtfOptions($sectionName) {
 	return get_atf_options($sectionName);
 }
