@@ -15,7 +15,6 @@ function atf_admin_notice($message) {
 
 include 'components/atf-less.php';
 include 'components/atf-tgmpa.php';
-include 'options/options.php';
 
 /**
  * ...
@@ -30,14 +29,11 @@ include 'options/options.php';
 
 include 'components/shortcode-gallery-views.php';
 include 'components/thumb-getting.php';
-include 'components/wp_bootstrap_navwalker.php';
-include 'components/breadcrumbs.php';
+
 
 if ( ! function_exists( 'pagination' ) ) :
 	include 'components/bootstrap_pagination.php';
 endif;
-
-include 'components/bootstrap_comments.php';
 
 include_once 'components/login-page.php';
 

@@ -7,3 +7,9 @@
 [submodule "tgm-plugin-activation"]
 	path = tgm-plugin-activation
 	url = https://github.com/EugenBobrowski/TGM-Plugin-Activation.git
+[submodule "wp-bootstrap-navwalker"]
+	path = wp-bootstrap-navwalker
+	url = https://github.com/EugenBobrowski/wp-bootstrap-navwalker.git
+[submodule "wp-breadcrumbs"]
+	path = wp-breadcrumbs
+	url = https://github.com/EugenBobrowski/wp-breadcrumbs
