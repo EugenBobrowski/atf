@@ -4,3 +4,6 @@
 [submodule "aq-resizer"]
 	path = aq-resizer
 	url = https://github.com/EugenBobrowski/Aqua-Resizer.git
+[submodule "tgm-plugin-activation"]
+	path = tgm-plugin-activation
+	url = https://github.com/EugenBobrowski/TGM-Plugin-Activation.git
