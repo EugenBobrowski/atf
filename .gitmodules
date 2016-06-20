@@ -1,3 +1,6 @@
 [submodule "options/atf-fields"]
 	path = options/atf-fields
 	url = https://github.com/EugenBobrowski/atf-fields.git
+[submodule "aq-resizer"]
+	path = aq-resizer
+	url = https://github.com/EugenBobrowski/Aqua-Resizer.git
