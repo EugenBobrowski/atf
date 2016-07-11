@@ -41,8 +41,6 @@
 //	include_once 'components/link-plugins.php';
 //}
 
-
-
 function atf_include_modals() {
 	if (file_exists(__DIR__.'/_modal_shortcode/modal-shortcode.php')) {
 		include_once __DIR__.'/_modal_shortcode/modal-shortcode.php';
@@ -57,6 +55,14 @@ function atf_include_bootstrap_navwalker(){
 	if (file_exists(__DIR__.'/wp-bootstrap-navwalker/wp_bootstrap_navwalker.php')) {
 		include_once __DIR__.'/wp-bootstrap-navwalker/wp_bootstrap_navwalker.php';
 	} else {
-		wp_die('Include plese <em>wp_bootstrap_navwalker</em> in Atf');
+		wp_die('Include please <em>wp_bootstrap_navwalker</em> in Atf');
+	}
+}
+
+function atf_include_pagination(){
+	if (file_exists(__DIR__.'/atf-pagination/pagination.php')) {
+		include_once __DIR__.'/atf-pagination/pagination.php';
+	} else {
+		wp_die('Include please <em>atf-pagination</em> in Atf');
 	}
 }

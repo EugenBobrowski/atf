@@ -13,3 +13,6 @@
 [submodule "wp-breadcrumbs"]
 	path = wp-breadcrumbs
 	url = https://github.com/EugenBobrowski/wp-breadcrumbs
+[submodule "atf-pagination"]
+	path = atf-pagination
+	url = https://github.com/EugenBobrowski/atf-pagination.git
