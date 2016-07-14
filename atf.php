@@ -45,12 +45,3 @@ function atf_include_breadcrumbs()
         wp_die('Include please <em>atf-breadcrumbs</em> in Atf');
     }
 }
-
-function atf_include_pagination()
-{
-    if (file_exists(__DIR__ . '/atf-pagination/pagination.php')) {
-        include_once __DIR__ . '/atf-pagination/pagination.php';
-    } else {
-        wp_die('Include please <em>atf-pagination</em> in Atf');
-    }
-}
