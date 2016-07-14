@@ -38,31 +38,33 @@ class Atf_Modals_Shortcode
 		$link = '<a href="#' . $attr['id'] . '" class="' . $attr['link-class'] . '" data-toggle="modal" >' . $attr['link-text'] . '</a>';
 		$output .= $link;
 
-
-		$modal = '<!-- Modal ' . $attr['id'] . '-->';
-		$modal .= '<div class="modal fade" id="' . $attr['id'] . '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'.
-			'<div class="modal-dialog" role="document">'.
-			'<div class="modal-content">';
-		if (isset($attr['title']) && !in_array('no_title', $attr)) {
-			$modal .= '<div class="modal-header">
+        if (!isset($this->modals_html[$attr['id']])) {
+            $modal = '<!-- Modal ' . $attr['id'] . '-->';
+            $modal .= '<div class="modal fade" id="' . $attr['id'] . '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'.
+                '<div class="modal-dialog" role="document">'.
+                '<div class="modal-content">';
+            if (isset($attr['title']) && !in_array('no_title', $attr)) {
+                $modal .= '<div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">' . $attr['title'] . '</h4>
       </div>';
-		}
-		
-
-		$modal .= '<div class="modal-body">'.apply_filters('the_content', $content).'</div>';
-
-		if (isset($attr['close-text']) && !in_array('no_footer', $attr)) {
-			$modal .= '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">'.$attr['close-text'].'</button></div>';
-		}
+            }
 
 
-		$modal .= '</div>
+            $modal .= '<div class="modal-body">'.apply_filters('the_content', $content).'</div>';
+
+            if (isset($attr['close-text']) && !in_array('no_footer', $attr)) {
+                $modal .= '<div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">'.$attr['close-text'].'</button></div>';
+            }
+
+
+            $modal .= '</div>
   </div>
 </div>';
 
-		$this->modals_html[$attr['id']] = $modal;
+            $this->modals_html[$attr['id']] = $modal;
+        }
+
 
 
 		return $output;
