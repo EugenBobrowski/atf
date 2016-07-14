@@ -5,41 +5,8 @@
  * Time: 1:45 PM
  * To change this template use File | Settings | File Templates.
  */
-//define ('ATF_VERSION', '1.0');
-//define ('ATF_PATH', get_template_directory() . '/atf/' );
-//
-//
-//function atf_admin_notice($message) {
-//	echo $message;
-//}
-//
-//include 'components/atf-less.php';
-//include 'components/atf-tgmpa.php';
-//
-///**
-// * ...
-// */
-//
-///**
-// * Customize Woocommerce and integrate.
-// *
-// * @since Twenty Fifteen 1.0
-// */
-//
-//
-//include 'components/shortcode-gallery-views.php';
-//include 'components/thumb-getting.php';
-//
-//
-//if ( ! function_exists( 'pagination' ) ) :
-//	include 'components/bootstrap_pagination.php';
-//endif;
-//
-//include_once 'components/login-page.php';
-//
-//if (is_admin()) {
-//	include_once 'components/link-plugins.php';
-//}
+define ('ATF_VERSION', '1.0');
+define ('ATF_PATH', get_template_directory() . '/atf/' );
 
 function atf_include_modals() {
 	if (file_exists(__DIR__.'/_modal_shortcode/modal-shortcode.php')) {
@@ -59,6 +26,20 @@ function atf_include_bootstrap_navwalker(){
 	}
 }
 
+function atf_include_pagination(){
+	if (file_exists(__DIR__.'/atf-pagination/pagination.php')) {
+		include_once __DIR__.'/atf-pagination/pagination.php';
+	} else {
+		wp_die('Include please <em>atf-pagination</em> in Atf');
+	}
+}
+
+function atf_include_breadcrumbs(){
+	if (file_exists(__DIR__.'/wp-breadcrumbs/wp-breadcrumbs.php')) {
+		include_once __DIR__.'/wp-breadcrumbs/wp-breadcrumbs.php';
+	} else {
+		wp_die('Include please <em>atf-breadcrumbs</em> in Atf');
+	}
 function atf_include_pagination(){
 	if (file_exists(__DIR__.'/atf-pagination/pagination.php')) {
 		include_once __DIR__.'/atf-pagination/pagination.php';
